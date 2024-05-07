@@ -14,7 +14,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: gh run view ${{ github.run_id }} --json jobs | jq '.jobs[] | select(.name == "run") | .id'
+    - run: gh run view ${{ github.run_id }} --json jobs | jq '.jobs[] | select(.name == "${{ github.job }}") | .databaseId'
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
