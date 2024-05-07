@@ -15,3 +15,4 @@ runs:
   using: "composite"
   steps:
     - run: gh run view ${{ github.run_id }} --json jobs | jq '.jobs[] | select(.name == "run") | .id'
+      shell: bash
