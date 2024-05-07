@@ -18,3 +18,5 @@ runs:
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
+    - run: echo "Job ID: $(cat $GITHUB_OUTPUT)"
+      shell: bash
