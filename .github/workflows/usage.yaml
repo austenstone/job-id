@@ -10,3 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./
+        id: job-id
+      - run: echo $GITHUB_JOB_ID
+        env:
+          GITHUB_JOB_ID: ${{ steps.job-id.outputs.job-id }}
