@@ -16,3 +16,5 @@ runs:
   steps:
     - run: gh run view ${{ github.run_id }} --json jobs | jq '.jobs[] | select(.name == "run") | .id'
       shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
