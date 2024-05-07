@@ -1,33 +1,22 @@
-# Action
+# Get Job ID Action
 
-This repository serves as a [template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) for TypeScript [Actions](https://docs.github.com/en/actions).
+GitHub doesn't provide the job id anywhere so here's a simple action to get the job id for the current job.
 
 ## Usage
-Create a workflow (eg: `.github/workflows/seat-count.yml`). See [Creating a Workflow file](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
 
-<!-- 
-### PAT(Personal Access Token)
-
-You will need to [create a PAT(Personal Access Token)](https://github.com/settings/tokens/new?scopes=admin:org) that has `admin:org` access.
-
-Add this PAT as a secret so we can use it as input `github-token`, see [Creating encrypted secrets for a repository](https://docs.github.com/en/enterprise-cloud@latest/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository). 
-### Organizations
-
-If your organization has SAML enabled you must authorize the PAT, see [Authorizing a personal access token for use with SAML single sign-on](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on).
--->
+Calling the action in the job you want to get the job id for. Provide an ID for the step so you can reference the output.
 
 #### Example
 ```yml
-name: TypeScript Action Workflow
-on:
-  workflow_dispatch:
-
 jobs:
   run:
-    name: Run Action
     runs-on: ubuntu-latest
     steps:
-      - uses: austenstone/action-typescript@main
+      - uses: austenstone/job-id@v1
+        id: job-id
+      - run: echo $GITHUB_JOB_ID
+        env:
+          GITHUB_JOB_ID: ${{ steps.job-id.outputs.job-id }}
 ```
 
 ## ➡️ Inputs
@@ -37,12 +26,11 @@ Various inputs are defined in [`action.yml`](action.yml):
 | --- | - | - |
 | github&#x2011;token | Token to use to authorize. | ${{&nbsp;github.token&nbsp;}} |
 
-<!-- 
+
 ## ⬅️ Outputs
 | Name | Description |
 | --- | - |
-| output | The output. |
--->
+| job-id | The job id for the current job. |
 
 ## Further help
 To get more help on the Actions see [documentation](https://docs.github.com/en/actions).
