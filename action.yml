@@ -20,7 +20,7 @@ runs:
 
   steps:
     - id: get-job-id
-      run: echo "$(gh run view ${{ github.run_id }} --json jobs | jq -r 'first(.jobs[] | select(.name == "${{ github.job }}") | .databaseId'))" >> $GITHUB_OUTPUT
+      run: echo "$(gh run view ${{ github.run_id }} --json jobs | jq -r 'first(.jobs[] | select(.name == "${{ github.job }}") | .databaseId)')" >> $GITHUB_OUTPUT
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
